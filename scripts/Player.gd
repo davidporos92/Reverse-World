@@ -23,7 +23,7 @@ func jump():
 func play_animation():
 	if velocity.x < 0:
 		$AnimatedSprite.flip_h = false
-	else:
+	elif velocity.x > 0:
 		$AnimatedSprite.flip_h = true
 			
 	if is_on_floor():
