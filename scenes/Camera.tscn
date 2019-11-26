@@ -10,7 +10,7 @@ limit_top = 0
 scroll_offset = Vector2( 1, 1 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.5, 0.5 )
+motion_scale = Vector2( 0.5, 1 )
 motion_offset = Vector2( 640, 0 )
 motion_mirroring = Vector2( 1280, 0 )
 

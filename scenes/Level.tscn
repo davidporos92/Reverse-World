@@ -11,7 +11,7 @@ extents = Vector2( 64, 64 )
 [node name="Walls" type="Node" parent="."]
 
 [node name="Floor" type="StaticBody2D" parent="Walls"]
-position = Vector2( 3144, 710 )
+position = Vector2( 3154.32, 746.136 )
 scale = Vector2( 100, 1 )
 __meta__ = {
 "_edit_group_": true
@@ -24,4 +24,4 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Adult" parent="." instance=ExtResource( 2 )]
-position = Vector2( 3715, 320 )
+position = Vector2( 2501.86, 433.571 )
