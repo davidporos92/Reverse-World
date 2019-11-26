@@ -4,12 +4,18 @@ signal health_changed(live_count)
 
 export(int) var speed = 600
 export(int) var gravity = 50
-export(int) var jump_power = -1000
+export(int) var jump_power = -1300
 
 const FLOOR = Vector2(0, -1)
 
 var velocity = Vector2()
 var lives = 0
+
+func _ready():
+	spawn_at_starting_position()
+
+func spawn_at_starting_position():
+	position = get_parent().get_node("StartingPosition").position
 
 func move_left():
 	velocity.x = -speed
@@ -29,6 +35,13 @@ func add_health():
 	emit_signal("health_changed", lives)
 	if lives >= 3:
 		game_over()
+
+func hit(spawn_to_start):
+	$AnimatedSprite.play("Jump")
+	$Hit.play()
+	add_health()
+	if spawn_to_start:
+		spawn_at_starting_position()
 
 func play_animation():
 	if velocity.x < 0:
@@ -59,7 +72,6 @@ func _physics_process(delta):
 		stay()
 	
 	if Input.is_action_pressed("ui_up") && is_on_floor():
-		add_health()
 		jump()
 	
 	velocity.y += gravity
@@ -70,3 +82,5 @@ func _physics_process(delta):
 		for i in range(get_slide_count()):
 			if "Hole" in get_slide_collision(i).collider.name:
 				win()
+			if "Lava" in get_slide_collision(i).collider.name:
+				hit(true)
