@@ -46,11 +46,21 @@ func hit(spawn_to_start):
 func play_animation():
 	if velocity.x < 0:
 		$AnimatedSprite.flip_h = false
+		if sign($CollisionShape2D.position.x) == 1:
+			$CollisionShape2D.position.x *= -1
+			$CollisionShape2D2.position.x *= -1
+			$CollisionShape2D3.position.x *= -1
+			$CollisionShape2D4.position.x *= -1
 	elif velocity.x > 0:
 		$AnimatedSprite.flip_h = true
+		if sign($CollisionShape2D.position.x) == -1:
+			$CollisionShape2D.position.x *= -1
+			$CollisionShape2D2.position.x *= -1
+			$CollisionShape2D3.position.x *= -1
+			$CollisionShape2D4.position.x *= -1
 			
 	if is_on_floor():
-		if velocity.x != 0:
+		if abs(velocity.x) == speed:
 			$AnimatedSprite.play("Run")
 		else:
 			$AnimatedSprite.play("Idle")
