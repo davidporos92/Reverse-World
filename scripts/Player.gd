@@ -19,6 +19,7 @@ func stay():
 
 func jump():
 	velocity.y = jump_power
+	$Jump.play()
 
 func play_animation():
 	if velocity.x < 0:
