@@ -35,6 +35,9 @@ func play_animation():
 	else:
 		$AnimatedSprite.play("Jump")
 
+func win():
+	get_tree().change_scene("res://scenes/Win.tscn")
+
 func _physics_process(delta):
 	if Input.is_action_pressed("ui_right"):
 		move_right()
@@ -48,5 +51,9 @@ func _physics_process(delta):
 	
 	velocity.y += gravity
 	velocity = move_and_slide(velocity, FLOOR)
-	
 	play_animation()
+	
+	if get_slide_count() > 0:
+		for i in range(get_slide_count()):
+			if "Hole" in get_slide_collision(i).collider.name:
+				win()
