@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/Dino.gd" type="Script" id=1]
 [ext_resource path="res://images/dinos/adult/adult_jump.png" type="Texture" id=2]
@@ -24,19 +24,6 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 64.0
-height = 37.3333
-
-[sub_resource type="CircleShape2D" id=3]
-radius = 49.3333
-
-[sub_resource type="CircleShape2D" id=4]
-radius = 60.0148
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 12, 16 )
-
 [node name="Adult" type="KinematicBody2D"]
 scale = Vector2( 0.75, 0.75 )
 script = ExtResource( 1 )
@@ -45,18 +32,5 @@ script = ExtResource( 1 )
 frames = SubResource( 1 )
 animation = "Idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -5.33333, 68 )
-shape = SubResource( 2 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2( -60, 17.3333 )
-shape = SubResource( 3 )
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
-position = Vector2( -117.333, -82.6667 )
-shape = SubResource( 4 )
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
-position = Vector2( -106.667, 40 )
-shape = SubResource( 5 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -1.33333, -26.6667, -2.66667, -57.3333, -4, -77.3333, -9.33333, -117.333, -41.3333, -153.333, -133.333, -126.667, -181.333, -94.6667, -181.333, -54.6667, -154.667, -41.3333, -108, -41.3333, -90.6667, -21.3333, -92, 16, -116, 20, -121.333, 54.6667, -77.3333, 54.6667, -62.6667, 49.3333, -60, 54.6667, -45.3333, 56, -44, 70.6667, -29.3333, 85.3333, 0, 92, 0, 113.333, -21.3333, 117.333, -37.3333, 134.667, -37.3333, 148, 29.3333, 148, 29.3333, 121.333, 50.6667, 89.3333, 40, 73.3333, 21.3333, 69.3333, 60, 36, 53.3333, -10.6667 )

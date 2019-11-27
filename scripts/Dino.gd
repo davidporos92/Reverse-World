@@ -22,6 +22,7 @@ const SOUND_GROW = "Grow"
 
 var velocity = Vector2()
 var enabled = false 
+var points = 0
 
 func enable():
 	visible = true
@@ -38,10 +39,18 @@ func disable():
 			child.set_deferred("disabled", true)
 
 func move_left():
+	$AnimatedSprite.flip_h = false
 	velocity.x = -speed
+	for child in get_children():
+		if "Collision" in child.name && sign(child.scale.x) == -1:
+			child.scale.x *= -1
 
 func move_right():
+	$AnimatedSprite.flip_h = true
 	velocity.x = speed
+	for child in get_children():
+		if "Collision" in child.name && sign(child.scale.x) == 1:
+			child.scale.x *= -1
 
 func stay():
 	velocity.x = 0
@@ -56,17 +65,6 @@ func hit(spawn_to_start):
 	emit_signal("hit", spawn_to_start)
 
 func play_animation():
-	if velocity.x < 0:
-		$AnimatedSprite.flip_h = false
-		for child in get_children():
-			if "Collision" in child.name && sign(child.position.x) == 1:
-				child.position.x *= -1
-	elif velocity.x > 0:
-		$AnimatedSprite.flip_h = true
-		for child in get_children():
-			if "Collision" in child.name && sign(child.position.x) == -1:
-				child.position.x *= -1
-			
 	if is_on_floor():
 		if abs(velocity.x) == speed:
 			$AnimatedSprite.play("Run")
@@ -100,19 +98,17 @@ func _physics_process(delta):
 				emit_signal("win")
 			if "Lava" in collider.name:
 				hit(true)
-			if "Enemy" in collider.name:
-				emit_signal("grow")
-				emit_signal("play_sound", SOUND_GROW)
-				if collider.has_method("kill"):
-					collider.kill()
-			if "Meat" in collider.name:
-				if collider.has_method("remove"):
-					collider.remove()
-			if "Potion" in collider.name:
-				emit_signal("shrink")
-				emit_signal("play_sound", SOUND_SHRINK)
-				if collider.has_method("remove"):
-					collider.remove()
 	
 	if position.y > death_below_y:
 		emit_signal("game_over")
+
+func collect(point):
+	points += point
+
+func shrink():
+	emit_signal("shrink")
+	emit_signal("play_sound", SOUND_SHRINK)
+
+func ememy_hit():
+	emit_signal("grow")
+	emit_signal("play_sound", SOUND_GROW)

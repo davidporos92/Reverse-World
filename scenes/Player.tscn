@@ -10,10 +10,13 @@
 script = ExtResource( 1 )
 
 [node name="Adult" parent="." instance=ExtResource( 2 )]
+speed = 700
+jump_power = -1000
 
 [node name="Mini" parent="." instance=ExtResource( 3 )]
 visible = false
 scale = Vector2( 0.15, 0.15 )
+jump_power = -1000
 
 [node name="PlayerSounds" parent="." instance=ExtResource( 4 )]
 
