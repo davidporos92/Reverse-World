@@ -90,7 +90,18 @@ func _physics_process(delta):
 	
 	if get_slide_count() > 0:
 		for i in range(get_slide_count()):
-			if "Hole" in get_slide_collision(i).collider.name:
+			var collider = get_slide_collision(i).collider
+			if "Hole" in collider.name:
 				win()
-			if "Lava" in get_slide_collision(i).collider.name:
+			if "Lava" in collider.name:
 				hit(true)
+			if "Enemy" in collider.name:
+				hit(false)
+				if collider.has_method("kill"):
+					collider.kill()
+			if "Meat" in collider.name:
+				if collider.has_method("remove"):
+					collider.remove()
+			if "Potion" in collider.name:
+				if collider.has_method("remove"):
+					collider.remove()

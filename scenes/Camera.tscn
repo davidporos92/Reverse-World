@@ -5,7 +5,7 @@
 [node name="Camera2D" type="Camera2D"]
 current = true
 limit_top = 0
-limit_bottom = 720
+limit_bottom = 780
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_offset = Vector2( 1, 1 )
