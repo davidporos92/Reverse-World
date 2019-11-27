@@ -44,7 +44,7 @@ func set_lives(live_count):
 		_:
 			lives.texture = lives_0
 
-func _on_Adult_health_changed(live_count):
+func _on_Player_health_changed(live_count):
 	set_lives(live_count)
 
 

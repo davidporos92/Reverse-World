@@ -1,107 +1,81 @@
-extends KinematicBody2D
+extends Node2D
 
 signal health_changed(live_count)
 
-export(int) var speed = 600
-export(int) var gravity = 50
-export(int) var jump_power = -1300
+const SIZE_ADULT = 2
+const SIZE_MINI = 1
 
-const FLOOR = Vector2(0, -1)
+onready var player_container = {
+	SIZE_ADULT: $Adult,
+	SIZE_MINI: $Mini,
+}
+onready var max_size = player_container.keys().max()
+onready var min_size = player_container.keys().min()
+onready var size = max_size
 
-var velocity = Vector2()
 var lives = 0
+var last_hit = 0
+var last_shrink = 0
+var last_grow = 0
+var wait_til_next_hit_msec = 1500
+var wait_til_next_size_change_msec = 1500
 
-func _ready():
-	spawn_at_starting_position()
+func _on_Dino_shrink():
+	if size <= min_size:
+		return
+	
+	if OS.get_ticks_msec() - last_shrink < wait_til_next_size_change_msec:
+		return
+	
+	last_shrink = OS.get_ticks_msec()
+	
+	var pos = player_container[size].position
+	player_container[size].disable()
+	size -= 1
+	player_container[size].position = pos
+	player_container[size].enable()
 
-func spawn_at_starting_position():
-	position = get_parent().get_node("StartingPosition").position
+func _on_Dino_grow():
+	if size >= max_size:
+		return
+	
+	if OS.get_ticks_msec() - last_grow < wait_til_next_size_change_msec:
+		return
+	
+	last_grow = OS.get_ticks_msec()
+	
+	var pos = player_container[size].position
+	player_container[size].disable()
+	size += 1
+	player_container[size].position = pos
+	player_container[size].enable()
 
-func move_left():
-	velocity.x = -speed
-
-func move_right():
-	velocity.x = speed
-
-func stay():
-	velocity.x = 0
-
-func jump():
-	velocity.y = jump_power
-	$Jump.play()
-
-func add_health():
+func _on_Dino_hit(spawn_to_start):
+	if OS.get_ticks_msec() - last_hit < wait_til_next_hit_msec:
+		return
+	
+	last_hit = OS.get_ticks_msec()
 	lives += 1
 	emit_signal("health_changed", lives)
 	if lives >= 3:
 		game_over()
-
-func hit(spawn_to_start):
-	$AnimatedSprite.play("Jump")
-	$Hit.play()
-	add_health()
+	
 	if spawn_to_start:
 		spawn_at_starting_position()
 
-func play_animation():
-	if velocity.x < 0:
-		$AnimatedSprite.flip_h = false
-		if sign($CollisionShape2D.position.x) == 1:
-			$CollisionShape2D.position.x *= -1
-			$CollisionShape2D2.position.x *= -1
-			$CollisionShape2D3.position.x *= -1
-			$CollisionShape2D4.position.x *= -1
-	elif velocity.x > 0:
-		$AnimatedSprite.flip_h = true
-		if sign($CollisionShape2D.position.x) == -1:
-			$CollisionShape2D.position.x *= -1
-			$CollisionShape2D2.position.x *= -1
-			$CollisionShape2D3.position.x *= -1
-			$CollisionShape2D4.position.x *= -1
-			
-	if is_on_floor():
-		if abs(velocity.x) == speed:
-			$AnimatedSprite.play("Run")
-		else:
-			$AnimatedSprite.play("Idle")
-	else:
-		$AnimatedSprite.play("Jump")
+func _ready():
+	$Adult.enable()
+	$Mini.disable()
+	spawn_at_starting_position()
+
+func _physics_process(delta):
+	$Camera2D.position = player_container[size].position
+
+func spawn_at_starting_position():
+	player_container[size].position = get_parent().get_node("StartingPosition").position
 
 func win():
 	get_tree().change_scene("res://scenes/Win.tscn")
 
 func game_over():
 	get_tree().change_scene("res://scenes/GameOver.tscn")
-
-func _physics_process(delta):
-	if Input.is_action_pressed("ui_right"):
-		move_right()
-	elif Input.is_action_pressed("ui_left"):
-		move_left()
-	else:
-		stay()
-	
-	if Input.is_action_pressed("ui_up") && is_on_floor():
-		jump()
-	
-	velocity.y += gravity
-	velocity = move_and_slide(velocity, FLOOR)
-	play_animation()
-	
-	if get_slide_count() > 0:
-		for i in range(get_slide_count()):
-			var collider = get_slide_collision(i).collider
-			if "Hole" in collider.name:
-				win()
-			if "Lava" in collider.name:
-				hit(true)
-			if "Enemy" in collider.name:
-				hit(false)
-				if collider.has_method("kill"):
-					collider.kill()
-			if "Meat" in collider.name:
-				if collider.has_method("remove"):
-					collider.remove()
-			if "Potion" in collider.name:
-				if collider.has_method("remove"):
-					collider.remove()
