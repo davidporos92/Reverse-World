@@ -2,26 +2,26 @@
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Camera.tscn" type="PackedScene" id=2]
-[ext_resource path="res://images/dinos/adult/adult_jump.png" type="Texture" id=3]
-[ext_resource path="res://images/dinos/adult/adult_run1.png" type="Texture" id=4]
-[ext_resource path="res://images/dinos/adult/adult_run2.png" type="Texture" id=5]
-[ext_resource path="res://images/dinos/adult/adult_idle.png" type="Texture" id=6]
+[ext_resource path="res://images/dinos/adult/adult_run1.png" type="Texture" id=3]
+[ext_resource path="res://images/dinos/adult/adult_run2.png" type="Texture" id=4]
+[ext_resource path="res://images/dinos/adult/adult_idle.png" type="Texture" id=5]
+[ext_resource path="res://images/dinos/adult/adult_jump.png" type="Texture" id=6]
 [ext_resource path="res://sounds/Sfx_Jump.wav" type="AudioStream" id=7]
 [ext_resource path="res://sounds/Sfx_EnemyHit.wav" type="AudioStream" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "Jump",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "Run",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
 "loop": false,
 "name": "Idle",
 "speed": 5.0
@@ -52,9 +52,11 @@ animation = "Idle"
 
 [node name="Jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+volume_db = 2.0
 
 [node name="Hit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+volume_db = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -5.33333, 68 )
