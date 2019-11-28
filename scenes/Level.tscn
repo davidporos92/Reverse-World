@@ -14,26 +14,26 @@
 [ext_resource path="res://scenes/Cactus.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/Hole.tscn" type="PackedScene" id=13]
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 "
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
+[sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 16, 160, 16, 160, 80, 0, 80 )
 
-[sub_resource type="ConvexPolygonShape2D" id=2]
-points = PoolVector2Array( 0, 0, 480, 0, 480, 112, 0, 112 )
-
 [sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 0, 0, 320, 0, 320, 96, 0, 96 )
+points = PoolVector2Array( 32, 0, 448, 0, 480, 112, 0, 112 )
 
-[sub_resource type="ConvexPolygonShape2D" id=7]
+[sub_resource type="ConvexPolygonShape2D" id=4]
+points = PoolVector2Array( 32, 0, 288, 0, 320, 96, 0, 96 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 0, 160, 0, 160, 80, 0, 80 )
 
-[sub_resource type="ConvexPolygonShape2D" id=8]
+[sub_resource type="ConvexPolygonShape2D" id=6]
 points = PoolVector2Array( 0, 64, 160, 64, 160, 96, 0, 96 )
 
-[sub_resource type="TileSet" id=4]
+[sub_resource type="TileSet" id=7]
 0/name = "Grass"
 0/texture = ExtResource( 4 )
 0/tex_offset = Vector2( 0, 0 )
@@ -46,7 +46,7 @@ points = PoolVector2Array( 0, 64, 160, 64, 160, 96, 0, 96 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 1 ),
+"shape": SubResource( 2 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
@@ -62,7 +62,7 @@ points = PoolVector2Array( 0, 64, 160, 64, 160, 96, 0, 96 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 2 ),
+"shape": SubResource( 3 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0
@@ -78,7 +78,7 @@ points = PoolVector2Array( 0, 64, 160, 64, 160, 96, 0, 96 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 3 ),
+"shape": SubResource( 4 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 2/z_index = 0
@@ -94,7 +94,7 @@ points = PoolVector2Array( 0, 64, 160, 64, 160, 96, 0, 96 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 7 ),
+"shape": SubResource( 5 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 3/z_index = 0
@@ -110,13 +110,13 @@ points = PoolVector2Array( 0, 64, 160, 64, 160, 96, 0, 96 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 8 ),
+"shape": SubResource( 6 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, -16 )
 } ]
 4/z_index = 0
 
 [node name="Level" type="Node2D"]
-script = SubResource( 6 )
+script = SubResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 size = 1
@@ -202,7 +202,7 @@ size = Vector2( 7, 7 )
 
 [node name="Platform" type="TileMap" parent="."]
 position = Vector2( 0, -20 )
-tile_set = SubResource( 4 )
+tile_set = SubResource( 7 )
 cell_size = Vector2( 160, 80 )
 format = 1
 tile_data = PoolIntArray( 327636, 1, 0, 327640, 3, 0, 327664, 2, 0, 393100, 2, 0, 393145, 1, 0, 393148, 1, 0, 393152, 1, 0, 393156, 1, 0, 393159, 1, 0, 393179, 3, 0, 458628, 2, 0, 458630, 2, 0, 458632, 2, 0, 458634, 2, 0, 458638, 2, 0, 458640, 2, 0, 458699, 3, 0, 524195, 3, 0, 524237, 3, 0, 655235, 0, 0, 655236, 0, 0, 655237, 0, 0, 655238, 0, 0, 655239, 0, 0, 655240, 0, 0, 655241, 0, 0, 655242, 0, 0, 655243, 0, 0, 655244, 0, 0, 655245, 0, 0, 655246, 0, 0, 655247, 0, 0, 655248, 0, 0, 655249, 0, 0, 655250, 0, 0, 655251, 0, 0, 655252, 0, 0, 655253, 0, 0, 655254, 0, 0, 655255, 0, 0, 655256, 0, 0, 655257, 0, 0, 655258, 0, 0, 655259, 0, 0, 655260, 0, 0, 655261, 0, 0, 655262, 0, 0, 655263, 0, 0, 655264, 4, 0, 655265, 4, 0, 655266, 4, 0, 655267, 4, 0, 655268, 4, 0, 655269, 4, 0, 655270, 4, 0, 655271, 4, 0, 655272, 4, 0, 655273, 4, 0, 655274, 4, 0, 655275, 4, 0, 655276, 4, 0, 655277, 4, 0, 655278, 0, 0, 655279, 0, 0, 655280, 0, 0, 655281, 0, 0, 655282, 0, 0, 655283, 0, 0, 655284, 0, 0, 655285, 0, 0, 655286, 0, 0, 655287, 4, 0, 655288, 4, 0, 655289, 4, 0, 655290, 4, 0, 655291, 4, 0, 655292, 4, 0, 655293, 4, 0, 655294, 4, 0, 655295, 4, 0, 655296, 4, 0, 655297, 4, 0, 655298, 4, 0, 655299, 4, 0, 655300, 4, 0, 655301, 4, 0, 655302, 4, 0, 655303, 4, 0, 655304, 4, 0, 655305, 4, 0, 655306, 4, 0, 655307, 4, 0, 655308, 4, 0, 655309, 4, 0, 655310, 0, 0, 655311, 0, 0, 655312, 0, 0, 655313, 0, 0, 655314, 0, 0, 655315, 0, 0, 655316, 0, 0, 655317, 0, 0, 655318, 0, 0, 655319, 0, 0, 655320, 4, 0, 655321, 4, 0, 655322, 4, 0, 655323, 4, 0, 655324, 4, 0, 655325, 4, 0, 655326, 4, 0, 655327, 4, 0, 655328, 4, 0, 655329, 4, 0, 655330, 0, 0, 655331, 0, 0, 655332, 0, 0, 655333, 0, 0, 655334, 0, 0, 655335, 0, 0, 655336, 0, 0, 655337, 0, 0, 655338, 0, 0, 655339, 0, 0, 655340, 0, 0, 655341, 4, 0, 655342, 4, 0, 655343, 4, 0, 655344, 4, 0, 655345, 4, 0, 655346, 0, 0, 655347, 0, 0, 655348, 0, 0, 655349, 4, 0, 655350, 4, 0, 655351, 0, 0, 655352, 0, 0, 655353, 0, 0, 655354, 0, 0, 655355, 0, 0, 655356, 0, 0, 655357, 4, 0, 655358, 4, 0, 655359, 4, 0, 589824, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 4, 0, 589829, 4, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0 )
