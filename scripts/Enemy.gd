@@ -22,7 +22,8 @@ func kill():
 	velocity = Vector2(0, 0)
 	$AnimatedSprite.play("Dead")
 	$CollisionShape2D.set_deferred("disabled", true)
-	$Timer.start()
+	$KillTimer.start()
+	$RespawnTimer.start()
 
 func _physics_process(delta):
 	if is_dead:
@@ -36,11 +37,18 @@ func _physics_process(delta):
 		turn_around()
 	
 	if !$RayCast2D.is_colliding():
-		print("Not colliding")
 		turn_around()
-	elif "Lava" in $RayCast2D.get_collider().name:
-		print("Colliding with lava")
-		turn_around()
+	else:
+		var collider = $RayCast2D.get_collider()
+		if collider is TileMap:
+			var tile_pos = collider.world_to_map(position)
+			tile_pos -= $RayCast2D.get_collision_normal()
+			var tile_id = collider.get_cellv(tile_pos)
+			if tile_id == -1:
+				tile_pos.y += 1
+			tile_id = collider.get_cellv(tile_pos)
+			if "Lava" in collider.tile_set.tile_get_name(tile_id):
+				turn_around()
 	
 	if get_slide_count() > 0:
 		for i in range(get_slide_count()):
@@ -54,5 +62,14 @@ func turn_around():
 	$AnimatedSprite.flip_h = !$AnimatedSprite.flip_h
 	$RayCast2D.position.x *= -1
 
-func _on_Timer_timeout():
-	queue_free()
+func _on_KillTimer_timeout():
+	print(name, ": Kill timer done")
+	visible = false
+
+func _on_RespawnTimer_timeout():
+	print(name, ": Respawn timer done")
+	is_dead = false
+	$AnimatedSprite.play("Walk")
+	$CollisionShape2D.set_deferred("disabled", false)
+	visible = true
+	

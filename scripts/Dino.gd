@@ -93,11 +93,28 @@ func _physics_process(delta):
 	
 	if get_slide_count() > 0:
 		for i in range(get_slide_count()):
-			var collider = get_slide_collision(i).collider
+			var collision = get_slide_collision(i)
+			var collider = collision.collider
 			if "Hole" in collider.name:
 				emit_signal("win")
-			if "Lava" in collider.name:
-				hit(true)
+				continue
+			if "Enemy" in collider.name:
+				ememy_hit()
+				if collider.has_method("kill"):
+					collider.kill()
+				continue
+			if collider is TileMap:
+				var tile_pos = collider.world_to_map(position)
+				tile_pos -= collision.normal
+				var tile_id = collider.get_cellv(tile_pos)
+				if tile_id == -1:
+					tile_pos.y += 1
+					tile_id = collider.get_cellv(tile_pos)
+				if tile_id == -1:
+					continue
+				if "Lava" in collider.tile_set.tile_get_name(tile_id):
+					hit(true)
+				continue
 	
 	if position.y > death_below_y:
 		emit_signal("game_over")

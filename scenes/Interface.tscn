@@ -33,35 +33,35 @@ margin_right = 1250.0
 margin_bottom = 690.0
 
 [node name="Buttons" type="HBoxContainer" parent="UI/MarginContainer/HBoxContainer"]
-margin_right = 160.0
-margin_bottom = 64.0
+margin_right = 144.0
+margin_bottom = 57.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 custom_constants/separation = 32
 
 [node name="Back" type="TextureButton" parent="UI/MarginContainer/HBoxContainer/Buttons"]
-margin_right = 63.0
-margin_bottom = 64.0
+margin_right = 56.0
+margin_bottom = 57.0
 texture_normal = ExtResource( 3 )
 
 [node name="Sound" type="TextureButton" parent="UI/MarginContainer/HBoxContainer/Buttons"]
-margin_left = 95.0
-margin_right = 160.0
-margin_bottom = 64.0
+margin_left = 88.0
+margin_right = 144.0
+margin_bottom = 57.0
 texture_normal = ExtResource( 4 )
 texture_disabled = ExtResource( 5 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/HBoxContainer"]
-margin_left = 983.0
+margin_left = 1025.0
 margin_right = 1220.0
-margin_bottom = 64.0
+margin_bottom = 59.0
 size_flags_horizontal = 8
 size_flags_vertical = 2
 alignment = 2
 
 [node name="Lives" type="TextureRect" parent="UI/MarginContainer/HBoxContainer/HBoxContainer"]
-margin_right = 237.0
-margin_bottom = 64.0
+margin_right = 195.0
+margin_bottom = 59.0
 texture = ExtResource( 6 )
 [connection signal="pressed" from="UI/MarginContainer/HBoxContainer/Buttons/Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/HBoxContainer/Buttons/Sound" to="." method="_on_Sound_pressed"]

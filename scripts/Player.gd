@@ -2,8 +2,8 @@ extends Node2D
 
 signal health_changed(live_count)
 
-const SIZE_ADULT = 2
-const SIZE_MINI = 1
+const SIZE_ADULT = 1
+const SIZE_MINI = 0
 
 onready var player_container = {
 	SIZE_ADULT: $Adult,
@@ -11,7 +11,7 @@ onready var player_container = {
 }
 onready var max_size = player_container.keys().max()
 onready var min_size = player_container.keys().min()
-onready var size = max_size
+export(int, "Mini", "Adult") var size
 
 var lives = 0
 var last_hit = 0
@@ -19,6 +19,7 @@ var last_shrink = 0
 var last_grow = 0
 var wait_til_next_hit_msec = 1500
 var wait_til_next_size_change_msec = 1500
+var being_hit = false
 
 func _on_Dino_shrink():
 	if size <= min_size:
@@ -51,10 +52,11 @@ func _on_Dino_grow():
 	player_container[size].enable()
 
 func _on_Dino_hit(spawn_to_start):
-	if OS.get_ticks_msec() - last_hit < wait_til_next_hit_msec:
+	if being_hit:
 		return
 	
-	last_hit = OS.get_ticks_msec()
+	being_hit = true
+	
 	lives += 1
 	emit_signal("health_changed", lives)
 	if lives >= 3:
@@ -62,10 +64,15 @@ func _on_Dino_hit(spawn_to_start):
 	
 	if spawn_to_start:
 		spawn_at_starting_position()
+	
+	being_hit = false
 
 func _ready():
-	$Adult.enable()
-	$Mini.disable()
+	for p in player_container:
+		if size == p:
+			player_container[p].enable()
+		else:
+			player_container[p].disable()
 	spawn_at_starting_position()
 
 func _physics_process(delta):

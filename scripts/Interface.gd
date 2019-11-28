@@ -21,11 +21,13 @@ func mute():
 	muted = true
 	sound.texture_normal = img_muted
 	music.stream_paused = true
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), true)
 
 func unmute():
 	muted = false
 	sound.texture_normal = img_unmuted
 	music.stream_paused = false
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), false)
 
 func _on_Sound_pressed():
 	if muted:
