@@ -22,7 +22,7 @@ _global_script_class_icons={
 
 config/name="ReverseWorld"
 run/main_scene="res://scenes/Menu.tscn"
-config/icon="res://icon.png"
+config/icon="res://images/misc/favicon.png"
 
 [display]
 
