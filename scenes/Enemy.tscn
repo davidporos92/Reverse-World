@@ -32,9 +32,6 @@ frames = SubResource( 1 )
 animation = "Dead"
 playing = true
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 1.5
-
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2( 6.5, 4.7 )
 enabled = true
@@ -42,4 +39,13 @@ enabled = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.1, 2.5 )
 shape = SubResource( 2 )
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
+[node name="KillTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]
+[connection signal="timeout" from="KillTimer" to="." method="_on_KillTimer_timeout"]
