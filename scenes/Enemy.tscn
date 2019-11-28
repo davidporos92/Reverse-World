@@ -36,7 +36,7 @@ playing = true
 wait_time = 1.5
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2( 6.8, -0.7 )
+position = Vector2( 6.5, 4.7 )
 enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

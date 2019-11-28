@@ -1,19 +1,22 @@
 [gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://scripts/Level.gd" type="Script" id=1]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/Interface.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://images/platform/platform2.png" type="Texture" id=5]
-[ext_resource path="res://images/misc/cloud_big.png" type="Texture" id=6]
-[ext_resource path="res://images/misc/cloud_medium.png" type="Texture" id=7]
-[ext_resource path="res://images/misc/cloud_small.png" type="Texture" id=8]
-[ext_resource path="res://scenes/Meat.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/Lava.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/Box.tscn" type="PackedScene" id=11]
-[ext_resource path="res://scenes/Potion.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/Cactus.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/Hole.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Interface.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://images/platform/platform2.png" type="Texture" id=4]
+[ext_resource path="res://images/misc/cloud_big.png" type="Texture" id=5]
+[ext_resource path="res://images/misc/cloud_medium.png" type="Texture" id=6]
+[ext_resource path="res://images/misc/cloud_small.png" type="Texture" id=7]
+[ext_resource path="res://scenes/Meat.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Lava.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/Box.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/Potion.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/Cactus.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/Hole.tscn" type="PackedScene" id=13]
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends Node2D
+"
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 16, 160, 16, 160, 80, 0, 80 )
@@ -26,7 +29,7 @@ points = PoolVector2Array( 0, 0, 320, 0, 320, 96, 0, 96 )
 
 [sub_resource type="TileSet" id=4]
 0/name = "Grass"
-0/texture = ExtResource( 5 )
+0/texture = ExtResource( 4 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 160, 80 )
@@ -42,7 +45,7 @@ points = PoolVector2Array( 0, 0, 320, 0, 320, 96, 0, 96 )
 } ]
 0/z_index = 0
 1/name = "Cloud big"
-1/texture = ExtResource( 6 )
+1/texture = ExtResource( 5 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 0, 0, 480, 112 )
@@ -58,7 +61,7 @@ points = PoolVector2Array( 0, 0, 320, 0, 320, 96, 0, 96 )
 } ]
 1/z_index = 0
 2/name = "Cloud medium"
-2/texture = ExtResource( 7 )
+2/texture = ExtResource( 6 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 0, 0, 320, 96 )
@@ -74,7 +77,7 @@ points = PoolVector2Array( 0, 0, 320, 0, 320, 96, 0, 96 )
 } ]
 2/z_index = 0
 3/name = "Cloud small"
-3/texture = ExtResource( 8 )
+3/texture = ExtResource( 7 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 0, 0, 160, 80 )
@@ -87,36 +90,36 @@ points = PoolVector2Array( 0, 0, 320, 0, 320, 96, 0, 96 )
 [sub_resource type="TileSet" id=5]
 
 [node name="Level" type="Node2D"]
-script = ExtResource( 1 )
+script = SubResource( 6 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="Player" parent="." instance=ExtResource( 1 )]
 
-[node name="Interface" parent="." instance=ExtResource( 3 )]
+[node name="Interface" parent="." instance=ExtResource( 2 )]
 
 [node name="StartingPosition" type="Position2D" parent="."]
-position = Vector2( 1488, 528 )
+position = Vector2( -3200, 421 )
 
 [node name="Enemies" type="Node" parent="."]
 editor/display_folded = true
 
-[node name="Enemy" parent="Enemies" instance=ExtResource( 4 )]
+[node name="Enemy" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( 352, 590 )
 start_direction = 1
 size = Vector2( 8, 8 )
 
-[node name="Enemy2" parent="Enemies" instance=ExtResource( 4 )]
+[node name="Enemy2" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( -1088, 613.7 )
 start_direction = 1
 speed = 250
 size = Vector2( 8, 8 )
 
-[node name="Enemy3" parent="Enemies" instance=ExtResource( 4 )]
+[node name="Enemy3" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( -3712, 622 )
 start_direction = 1
 speed = 250
 size = Vector2( 6, 6 )
 
-[node name="Enemy4" parent="Enemies" instance=ExtResource( 4 )]
+[node name="Enemy4" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( -4064, 622 )
 speed = 300
 size = Vector2( 5.5, 5.5 )
@@ -134,106 +137,108 @@ position = Vector2( -6000, 0 )
 [node name="Misc" type="Node" parent="."]
 
 [node name="Meats" type="Node" parent="Misc"]
-editor/display_folded = true
 
-[node name="Meat" parent="Misc/Meats" instance=ExtResource( 9 )]
+[node name="Meat" parent="Misc/Meats" instance=ExtResource( 8 )]
 position = Vector2( 185, 632 )
 
-[node name="Meat2" parent="Misc/Meats" instance=ExtResource( 9 )]
+[node name="Meat2" parent="Misc/Meats" instance=ExtResource( 8 )]
 position = Vector2( 592, 641 )
 
-[node name="Meat3" parent="Misc/Meats" instance=ExtResource( 9 )]
+[node name="Meat3" parent="Misc/Meats" instance=ExtResource( 8 )]
 position = Vector2( 704, 545.5 )
 
-[node name="Meat4" parent="Misc/Meats" instance=ExtResource( 9 )]
+[node name="Meat4" parent="Misc/Meats" instance=ExtResource( 8 )]
 position = Vector2( 848, 545.5 )
 
-[node name="Meat5" parent="Misc/Meats" instance=ExtResource( 9 )]
+[node name="Meat5" parent="Misc/Meats" instance=ExtResource( 8 )]
 position = Vector2( 955, 643 )
 
-[node name="Meat6" parent="Misc/Meats" instance=ExtResource( 9 )]
+[node name="Meat6" parent="Misc/Meats" instance=ExtResource( 8 )]
 position = Vector2( -1088, 513.5 )
+
+[node name="Meat7" parent="Misc/Meats" instance=ExtResource( 8 )]
+position = Vector2( -3552, 352 )
+
+[node name="Meat8" parent="Misc/Meats" instance=ExtResource( 8 )]
+position = Vector2( -3711, 496 )
 
 [node name="Lavas" type="Node" parent="Misc"]
 
-[node name="Lava" parent="Misc/Lavas" instance=ExtResource( 10 )]
+[node name="Lava" parent="Misc/Lavas" instance=ExtResource( 9 )]
 position = Vector2( 800, 679 )
 
-[node name="Lava5" parent="Misc/Lavas" instance=ExtResource( 10 )]
+[node name="Lava5" parent="Misc/Lavas" instance=ExtResource( 9 )]
 position = Vector2( 640, 679 )
 
-[node name="Lava4" parent="Misc/Lavas" instance=ExtResource( 10 )]
+[node name="Lava4" parent="Misc/Lavas" instance=ExtResource( 9 )]
 position = Vector2( -1760, 679 )
 
-[node name="Lava11" parent="Misc/Lavas" instance=ExtResource( 10 )]
+[node name="Lava11" parent="Misc/Lavas" instance=ExtResource( 9 )]
 position = Vector2( -1600, 679 )
 
-[node name="Lava2" parent="Misc/Lavas" instance=ExtResource( 10 )]
+[node name="Lava2" parent="Misc/Lavas" instance=ExtResource( 9 )]
 position = Vector2( -320, 679 )
 
-[node name="Lava10" parent="Misc/Lavas" instance=ExtResource( 10 )]
+[node name="Lava10" parent="Misc/Lavas" instance=ExtResource( 9 )]
 position = Vector2( -480, 679 )
 
-[node name="Lava9" parent="Misc/Lavas" instance=ExtResource( 10 )]
+[node name="Lava9" parent="Misc/Lavas" instance=ExtResource( 9 )]
 position = Vector2( -160, 679 )
 
-[node name="Lava6" parent="Misc/Lavas" instance=ExtResource( 10 )]
+[node name="Lava6" parent="Misc/Lavas" instance=ExtResource( 9 )]
 position = Vector2( -2560, 680 )
 
-[node name="Lava7" parent="Misc/Lavas" instance=ExtResource( 10 )]
+[node name="Lava7" parent="Misc/Lavas" instance=ExtResource( 9 )]
 position = Vector2( -2720, 680 )
 
-[node name="Lava12" parent="Misc/Lavas" instance=ExtResource( 10 )]
+[node name="Lava12" parent="Misc/Lavas" instance=ExtResource( 9 )]
 position = Vector2( -2880, 679 )
 
-[node name="Lava13" parent="Misc/Lavas" instance=ExtResource( 10 )]
+[node name="Lava13" parent="Misc/Lavas" instance=ExtResource( 9 )]
 position = Vector2( -3040, 679 )
 
-[node name="Lava8" parent="Misc/Lavas" instance=ExtResource( 10 )]
+[node name="Lava8" parent="Misc/Lavas" instance=ExtResource( 9 )]
 position = Vector2( -2400, 680 )
 
 [node name="Boxes" type="Node" parent="Misc"]
 
-[node name="Box" parent="Misc/Boxes" instance=ExtResource( 11 )]
+[node name="Box" parent="Misc/Boxes" instance=ExtResource( 10 )]
 position = Vector2( -298, 622 )
 
-[node name="Box2" parent="Misc/Boxes" instance=ExtResource( 11 )]
+[node name="Box2" parent="Misc/Boxes" instance=ExtResource( 10 )]
 position = Vector2( -2080, 448 )
 
-[node name="Box5" parent="Misc/Boxes" instance=ExtResource( 11 )]
+[node name="Box5" parent="Misc/Boxes" instance=ExtResource( 10 )]
 position = Vector2( 1664, 624 )
 
-[node name="Box6" parent="Misc/Boxes" instance=ExtResource( 11 )]
+[node name="Box6" parent="Misc/Boxes" instance=ExtResource( 10 )]
 position = Vector2( 1664, 528 )
 
-[node name="Box7" parent="Misc/Boxes" instance=ExtResource( 11 )]
+[node name="Box7" parent="Misc/Boxes" instance=ExtResource( 10 )]
 position = Vector2( 1664, 432 )
 
-[node name="Box8" parent="Misc/Boxes" instance=ExtResource( 11 )]
+[node name="Box8" parent="Misc/Boxes" instance=ExtResource( 10 )]
 position = Vector2( 1664, 336 )
 
 [node name="Potions" type="Node" parent="Misc"]
 
-[node name="Potion" parent="Misc/Potions" instance=ExtResource( 12 )]
+[node name="Potion" parent="Misc/Potions" instance=ExtResource( 11 )]
 position = Vector2( -608, 659 )
 
-[node name="Potion2" parent="Misc/Potions" instance=ExtResource( 12 )]
+[node name="Potion2" parent="Misc/Potions" instance=ExtResource( 11 )]
 position = Vector2( -2912, 368 )
-
-[node name="Potion3" parent="Misc/Potions" instance=ExtResource( 12 )]
-position = Vector2( -2048, 352 )
 
 [node name="Cactuses" type="Node" parent="Misc"]
 
-[node name="Cactus" parent="Misc/Cactuses" instance=ExtResource( 13 )]
+[node name="Cactus" parent="Misc/Cactuses" instance=ExtResource( 12 )]
 position = Vector2( 2, 614 )
 scale = Vector2( 0.3, 0.3 )
 
-[node name="Cactus3" parent="Misc/Cactuses" instance=ExtResource( 13 )]
+[node name="Cactus3" parent="Misc/Cactuses" instance=ExtResource( 12 )]
 position = Vector2( -3488, 608 )
 scale = Vector2( 0.3, 0.3 )
 
-[node name="Cactus2" parent="Misc/Cactuses" instance=ExtResource( 13 )]
+[node name="Cactus2" parent="Misc/Cactuses" instance=ExtResource( 12 )]
 position = Vector2( -1856, 606.7 )
 scale = Vector2( 0.3, 0.3 )
 
@@ -241,6 +246,6 @@ scale = Vector2( 0.3, 0.3 )
 tile_set = SubResource( 5 )
 format = 1
 
-[node name="Hole" parent="." instance=ExtResource( 14 )]
-position = Vector2( -4896, 624 )
+[node name="Hole" parent="." instance=ExtResource( 13 )]
+position = Vector2( -5312, -16 )
 [connection signal="health_changed" from="Player" to="Interface" method="_on_Player_health_changed"]

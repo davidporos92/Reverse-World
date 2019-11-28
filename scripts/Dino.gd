@@ -98,6 +98,10 @@ func _physics_process(delta):
 				emit_signal("win")
 			if "Lava" in collider.name:
 				hit(true)
+			if "Enemy" in collider.name:
+				ememy_hit()
+				if collider.has_method("kill"):
+					collider.kill()
 	
 	if position.y > death_below_y:
 		emit_signal("game_over")
