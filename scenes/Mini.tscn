@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Dino.gd" type="Script" id=1]
 [ext_resource path="res://images/dinos/mini/jump.png" type="Texture" id=2]
@@ -24,6 +24,10 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 320.0
+height = 260.0
+
 [node name="Mini" type="KinematicBody2D"]
 scale = Vector2( 0.1, 0.1 )
 script = ExtResource( 1 )
@@ -32,5 +36,5 @@ script = ExtResource( 1 )
 frames = SubResource( 1 )
 animation = "Idle"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -501.751, -312.796, -489.577, -411.089, -312.864, -472.622, 108.406, -477.356, 141.539, -264.354, 502.853, -153.909, 515.475, -78.175, 163.628, 448.807, -158.241, 450.384, -265.738, 410.976, -281.472, 225.663, -282.82, 160.942, -282.82, 104.111, -328.674, 28.1113, -449.303, 12.3771, -451.71, -38.7303, -426.638, -93.0584, -494.758, -123.986 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
