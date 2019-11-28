@@ -46,9 +46,9 @@ func _physics_process(delta):
 			var tile_id = collider.get_cellv(tile_pos)
 			if tile_id == -1:
 				tile_pos.y += 1
-			tile_id = collider.get_cellv(tile_pos)
-			if "Lava" in collider.tile_set.tile_get_name(tile_id):
-				turn_around()
+				tile_id = collider.get_cellv(tile_pos)
+			if tile_id != -1 && "Lava" in collider.tile_set.tile_get_name(tile_id):
+					turn_around()
 	
 	if get_slide_count() > 0:
 		for i in range(get_slide_count()):
@@ -63,11 +63,9 @@ func turn_around():
 	$RayCast2D.position.x *= -1
 
 func _on_KillTimer_timeout():
-	print(name, ": Kill timer done")
 	visible = false
 
 func _on_RespawnTimer_timeout():
-	print(name, ": Respawn timer done")
 	is_dead = false
 	$AnimatedSprite.play("Walk")
 	$CollisionShape2D.set_deferred("disabled", false)
