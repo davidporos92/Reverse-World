@@ -14,42 +14,36 @@ onready var min_size = player_container.keys().min()
 export(int, "Mini", "Adult") var size
 
 var lives = 0
-var last_hit = 0
-var last_shrink = 0
-var last_grow = 0
-var wait_til_next_hit_msec = 1500
-var wait_til_next_size_change_msec = 1500
 var being_hit = false
+var is_changing_size = false
 
 func _on_Dino_shrink():
-	if size <= min_size:
+	if is_changing_size || size <= min_size:
 		return
 	
-	if OS.get_ticks_msec() - last_shrink < wait_til_next_size_change_msec:
-		return
-	
-	last_shrink = OS.get_ticks_msec()
+	is_changing_size = true
 	
 	var pos = player_container[size].position
 	player_container[size].disable()
 	size -= 1
 	player_container[size].position = pos
 	player_container[size].enable()
+	
+	is_changing_size = false
 
 func _on_Dino_grow():
-	if size >= max_size:
+	if is_changing_size || size >= max_size:
 		return
 	
-	if OS.get_ticks_msec() - last_grow < wait_til_next_size_change_msec:
-		return
-	
-	last_grow = OS.get_ticks_msec()
+	is_changing_size = true
 	
 	var pos = player_container[size].position
 	player_container[size].disable()
 	size += 1
 	player_container[size].position = pos
 	player_container[size].enable()
+	
+	is_changing_size = false
 
 func _on_Dino_hit(spawn_to_start):
 	if being_hit:
