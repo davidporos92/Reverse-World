@@ -84,7 +84,7 @@ func _physics_process(delta):
 	else:
 		stay()
 	
-	if Input.is_action_pressed("ui_up") && is_on_floor():
+	if Input.is_action_pressed("action_jump") && is_on_floor():
 		jump()
 	
 	velocity.y += gravity
