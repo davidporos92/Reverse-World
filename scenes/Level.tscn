@@ -22,16 +22,16 @@ script/source = "extends Node2D
 points = PoolVector2Array( 0, 16, 160, 16, 160, 80, 0, 80 )
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 32, 0, 448, 0, 480, 112, 0, 112 )
+points = PoolVector2Array( 0, 0, 480, 0, 480, 112, 0, 112 )
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
-points = PoolVector2Array( 32, 0, 288, 0, 320, 96, 0, 96 )
+points = PoolVector2Array( 0, 0, 320, 0, 320, 96, 0, 96 )
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 0, 160, 0, 160, 80, 0, 80 )
 
 [sub_resource type="ConvexPolygonShape2D" id=6]
-points = PoolVector2Array( 0, 64, 160, 64, 160, 96, 0, 96 )
+points = PoolVector2Array( 0, 32, 160, 32, 160, 96, 0, 96 )
 
 [sub_resource type="TileSet" id=7]
 0/name = "Grass"
